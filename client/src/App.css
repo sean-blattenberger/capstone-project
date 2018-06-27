@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(255, 254, 247);
+  font-family: 'Roboto';
+}
+
+Button {
+  margin: 5px 10px 5px 10px;
+  font-weight: 300;
+  letter-spacing: .1rem
+}
+.logo {
+  margin-left: 1rem;
+}
+
+img {
+  background-color: black;
+}
+.avatar {
+  background-color: rgb(255, 254, 247) !important;
+  margin: 10px 10px 10px 10px;
+}
+
+.collection-left {
+  color: green;
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  left: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
