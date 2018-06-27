@@ -19,7 +19,9 @@ img {
   background-color: rgb(255, 254, 247) !important;
   margin: 10px 10px 10px 10px;
 }
-
+p.vote-count {
+  margin-left: 8px !important;
+}
 .collection-left {
   color: green;
   position: absolute;
@@ -28,4 +30,10 @@ img {
   left: 15px;
   display: inline-block;
   vertical-align: middle;
+}
+.menu-item {
+  min-height: 100px !important;
+}
+.favorite:hover {
+  cursor: pointer;
 }
