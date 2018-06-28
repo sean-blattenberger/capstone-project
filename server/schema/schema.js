@@ -110,6 +110,16 @@ const Mutation = new GraphQLObjectType({
         })
         return restaurant.save();
       }
+    },
+    updateVotes: {
+      type: MenuType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        votes: { type: new GraphQLNonNull(GraphQLInt) }
+      },
+      resolve(parent, args) {
+        return Menu.update({_id: args.id}, { $set: {votes: args.votes}})
+      }
     }
   }
 })
