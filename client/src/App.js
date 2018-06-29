@@ -14,10 +14,10 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div>
+        <React.Fragment>
           <Header />
           <RestaurantList/>
-        </div>
+        </React.Fragment>
       </ApolloProvider>
     );
   }

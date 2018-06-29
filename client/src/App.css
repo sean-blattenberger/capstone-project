@@ -8,6 +8,11 @@ Button {
   font-weight: 300;
   letter-spacing: .1rem
 }
+
+button:active {
+  transform: scale3d(0.97, 0.97, 1);
+}
+
 .logo {
   margin-left: 1rem;
 }
@@ -20,7 +25,7 @@ img {
   margin: 10px 10px 10px 10px;
 }
 p.vote-count {
-  margin-left: 8px !important;
+  margin-left: 6px !important;
 }
 .collection-left {
   color: green;
@@ -36,4 +41,32 @@ p.vote-count {
 }
 .favorite:hover {
   cursor: pointer;
+}
+
+.collection-left :nth-child(1):hover {
+  cursor: pointer;
+  color: green !important;
+}
+.collection-left :nth-child(3):hover {
+  cursor: pointer;
+  color: red !important;
+}
+
+.collection.with-header .collection-header {
+  background-color: #455a64;
+  color: #81d4fa;
+}
+
+h4 {
+  font-weight: 200;
+}
+
+.title {
+  padding-bottom: 2px;
+  border-bottom: .25px solid #455a64;
+  margin-bottom: 3px !important;
+}
+
+.desc {
+  padding-top: 1em;
 }
