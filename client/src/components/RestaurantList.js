@@ -4,6 +4,7 @@ import '../App.css';
 import Restaurant from './Resaurant';
 import { graphql } from 'react-apollo';
 import  { getRestaurantsQuery } from '../queries/queries'
+import Button from 'react-materialize/lib/Button';
 
 const dummyLinks = [
   {
@@ -31,7 +32,7 @@ class RestaurantList extends Component {
     else {
       return this.props.data.restaurants.map((r, i) => {
         return (
-          <Restaurant key={i} i={i} r={r} dummyLinks={dummyLinks}/>
+          <Restaurant key={i} i={i} r={r} refetch={this.props.data ? this.props.data.refetch: null} dummyLinks={dummyLinks}/>
         )
       })
     }
@@ -42,6 +43,7 @@ class RestaurantList extends Component {
         <Collection className="z-depth-2">
           {this.displayRestaurants()}
         </Collection>
+        <Button onClick={this.props.refetch}>Click</Button>
       </div>
     );
   }

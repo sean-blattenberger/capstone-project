@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ApolloClient from 'apollo-boost';
-import {ApolloProvider} from 'react-apollo';
 import { Collection } from 'react-materialize';
 import Header from './Header';
 import MenuItem from './MenuItem';
@@ -22,7 +20,7 @@ class Menu extends Component {
           {
             restaurant.menuItems.concat([]).sort((a, b) => b.votes - a.votes).map((item, i) => {
               return (
-                <MenuItem key={i} item={item}/>
+                <MenuItem refetch={this.props.location.state} key={i} item={item}/>
               );
             })
           }
@@ -31,6 +29,7 @@ class Menu extends Component {
     }
   }
   render() {
+    console.log(this.props);
     return (
       <Provider client={client}>
         <React.Fragment>

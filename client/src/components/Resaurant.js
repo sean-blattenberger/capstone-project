@@ -16,6 +16,7 @@ class Restaurant extends React.Component {
         <Link to={{
           pathname: `/restaurants/${this.props.r.id}`,
           state: {
+            // refetch: this.props.refetch,
             restaurant: this.props.r
           }
         }}>
