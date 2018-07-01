@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
-import ApolloClient from 'apollo-boost';
-import {ApolloProvider} from 'react-apollo';
 import './App.css';
 import Header from './components/Header';
 import RestaurantList from './components/RestaurantList';
+import { client, Provider } from './queries/client';
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
 class App extends Component {
   state = {
   };
   render() {
     return (
-      <ApolloProvider client={client}>
+      <Provider client={client}>
         <React.Fragment>
           <Header />
           <RestaurantList/>
         </React.Fragment>
-      </ApolloProvider>
+      </Provider>
     );
   }
 }

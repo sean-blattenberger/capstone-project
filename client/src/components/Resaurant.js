@@ -3,12 +3,6 @@ import { CollectionItem } from 'react-materialize';
 import { Link } from 'react-router-dom';
 
 class Restaurant extends React.Component {
-  displayRestaurant = () => {
-    console.log(this.props);
-    if (this.props.r) {
-      return
-    }
-  }
   render() {
     return (
       <CollectionItem className="avatar">
@@ -16,7 +10,6 @@ class Restaurant extends React.Component {
         <Link to={{
           pathname: `/restaurants/${this.props.r.id}`,
           state: {
-            // refetch: this.props.refetch,
             restaurant: this.props.r
           }
         }}>

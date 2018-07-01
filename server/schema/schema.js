@@ -118,10 +118,7 @@ const Mutation = new GraphQLObjectType({
         votes: { type: new GraphQLNonNull(GraphQLInt) }
       },
       resolve(parent, args) {
-        return Menu.findOneAndUpdate({_id: args.id}, { $set: {votes: args.votes}}).then(() => {
-          return Menu.findOne({_id: args.id})
-        })
-        // return Menu.findById(args.id);
+        return Menu.findOneAndUpdate({_id: args.id}, { $set: {votes: args.votes}});
       }
     }
   }

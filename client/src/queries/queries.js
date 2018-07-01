@@ -1,22 +1,26 @@
-import { gql } from 'apollo-boost';
-
-const getRestaurantsQuery = gql`
-  {
+const getRestaurantsQuery = `
+  query {
     restaurants {
       id
       name
       category
       location
       menuItems {
+        id
         food
         type
         desc
         votes
-        id
       }
     }
   }
 `
+const updateVotes = `
+  mutation($votes: Int!, $id: ID!) {
+    updateVotes(votes: $votes, id: $id) {
+      votes
+    }
+  }
+`
 
-
-export { getRestaurantsQuery }
+export { getRestaurantsQuery, updateVotes }
