@@ -6,7 +6,7 @@ class Restaurant extends React.Component {
   render() {
     return (
       <CollectionItem className="avatar">
-        <img src={this.props.dummyLinks[this.props.i].img} alt="" className="circle responsive-img" />
+        <img src={this.props.dummyLinks[this.props.i].img} alt="" className="circle responsive-img rest" />
         <Link to={{
           pathname: `/restaurants/${this.props.r.id}`,
           state: {

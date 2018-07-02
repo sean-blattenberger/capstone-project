@@ -17,7 +17,7 @@ button:active {
   margin-left: 1rem;
 }
 
-img {
+img.rest {
   background-color: black;
 }
 .avatar {

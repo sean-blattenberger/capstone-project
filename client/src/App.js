@@ -3,41 +3,66 @@ import "./App.css";
 import Header from "./components/Header";
 import RestaurantList from "./components/RestaurantList";
 import { client, Provider } from "./queries/client";
-import { Row, Input, Icon, Button } from "react-materialize";
+import firebase from "firebase";
+const provider = new firebase.auth.GoogleAuthProvider();
+
+const config = {
+  apiKey: "AIzaSyAYSpM6Cjv4hE5EuM5ZkQQLrTBLzf9sGP4",
+  authDomain: "menu-sort.firebaseapp.com",
+  databaseURL: "https://menu-sort.firebaseio.com",
+  projectId: "menu-sort",
+  storageBucket: "menu-sort.appspot.com",
+  messagingSenderId: "239322719822"
+};
+firebase.initializeApp(config);
+let fbAuth = firebase.auth()
+
+firebase.auth().getRedirectResult().then(function (result) {
+  if (result.credential) {
+    var token = result.credential.accessToken;
+    console.log(token);
+  }
+  var user = result.user;
+}).catch(function (error) {
+  console.log("Error: ", error.code, error.message, error.email, error.credential);
+});
+
 
 class App extends Component {
   state = {
-    showForm: false,
-    userName: '',
-    password: ''
+    loggedIn: false,
+    user: {}
   };
-  renderForm = () => {
-    this.state.showForm
-      ? this.setState({ showForm: false })
-      : this.setState({ showForm: true });
+  componentDidMount() {
+    fbAuth.onAuthStateChanged(currentUser => {
+      console.log(this);
+      if (currentUser) {
+        window.localStorage.setItem('currentUser', currentUser)
+        this.setState({user: window.localStorage.currentUser})
+        this.setState({loggedIn: true})
+      } else {
+        console.log("not authorized");
+      }
+    })
+    console.log(window.localStorage.currentUser);
+    this.setState({user: window.localStorage.currentUser});
+  }
+  loginWithGoogle = () => {
+    firebase.auth().signInWithRedirect(provider);
   };
-  handleChange = event => {
-    this.setState({[event.target.name]: event.target.value})
+  signOut = () => {
+    firebase.auth().signOut().then(function () {
+      console.log("success")
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
   render() {
     return (
       <Provider client={client}>
         <React.Fragment>
-          <Header renderForm={this.renderForm} />
+          <Header signOut={this.signOut} loginWithGoogle={this.loginWithGoogle} loggedIn={this.state.loggedIn}/>
           <RestaurantList />
-          {this.state.showForm ? (
-            <Row>
-              <Input onChange={this.handleChange} s={6} value={this.state.userName} name="userName" label="User Name" validate>
-                <Icon>account_circle</Icon>
-              </Input>
-              <Input onChange={this.handleChange} s={6} value={this.state.password} name="password" label="Password" validate type="tel">
-                <Icon>lock</Icon>
-              </Input>
-              <Button onClick={() => {console.log("submit registration")}} className="light-blue darken-2">Submit</Button>
-            </Row>
-          ) : (
-            ""
-          )}
         </React.Fragment>
       </Provider>
     );

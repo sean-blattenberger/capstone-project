@@ -3,6 +3,7 @@ const _ = require('lodash');
 const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt, GraphQLList, GraphQLNonNull } = graphql;
 const Restaurant = require('../models/restaurant');
 const Menu = require('../models/menu');
+const User = require('../models/user');
 
 const MenuType = new GraphQLObjectType({
   name: 'Menu',

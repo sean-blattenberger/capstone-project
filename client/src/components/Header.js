@@ -14,14 +14,21 @@ const Header = props => {
           }
           right
         >
-          <Button
-            onClick={props.renderForm}
-            className="light-blue lighten-3 grey-text text-darken-4 z-depth-1"
-          >
-            Register
-          </Button>
-          <Button className="light-blue lighten-3 grey-text text-darken-4 z-depth-1">
-            Login
+          <Button onClick={(e) => {
+            if (props.loggedIn) {
+              props.signOut()
+            }
+            else {
+              props.loginWithGoogle();
+            }
+          }} className="light-blue lighten-3 z-depth-1">
+            {
+              props.loggedIn
+                ?
+                'Logout'
+                :
+                <img alt="google login" height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googleplus.svg" />
+            }
           </Button>
         </Navbar>
       </div>
