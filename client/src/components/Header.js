@@ -1,7 +1,12 @@
 import React from "react";
 import { Navbar, Button } from "react-materialize";
+import Spinner from 'react-spinner-material';
+
 
 const Header = props => {
+  // if (props.loading) {
+  //   return
+  // }
   return (
     <React.Fragment>
       <div className="navbar-fixed">
@@ -9,11 +14,16 @@ const Header = props => {
           className="blue-grey darken-3"
           brand={
             <div className=" light-blue-text text-lighten-3 logo thin">
-              🍽 MenuSortr{" "}
+              🍽 MenuSortr
             </div>
           }
           right
         >
+        {
+          props.loading
+          ?
+          <Spinner/>
+          :
           <Button onClick={(e) => {
             if (props.loggedIn) {
               props.signOut()
@@ -30,6 +40,7 @@ const Header = props => {
                 <img alt="google login" height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googleplus.svg" />
             }
           </Button>
+        }
         </Navbar>
       </div>
     </React.Fragment>

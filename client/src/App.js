@@ -17,25 +17,32 @@ const config = {
 firebase.initializeApp(config);
 let fbAuth = firebase.auth()
 
-firebase.auth().getRedirectResult().then(function (result) {
-  if (result.credential) {
-    var token = result.credential.accessToken;
-    console.log(token);
-  }
-  var user = result.user;
-}).catch(function (error) {
-  console.log("Error: ", error.code, error.message, error.email, error.credential);
-});
-
 
 class App extends Component {
   state = {
     loggedIn: false,
     user: {}
   };
+
+  checkAuth = () => {
+    this.setState({loading: true})
+    return firebase.auth().getRedirectResult()
+    .then(result => {
+      if (result.credential) {
+        var token = result.credential.accessToken;
+        console.log(token);
+      }
+      var user = result.user;
+      this.setState({loading: false})
+      return user
+    }).catch(function (error) {
+      console.error("Error: ", error.code, error.message, error.email, error.credential);
+    });
+
+  }
   componentDidMount() {
+    this.checkAuth()
     fbAuth.onAuthStateChanged(currentUser => {
-      console.log(this);
       if (currentUser) {
         window.localStorage.setItem('currentUser', currentUser)
         this.setState({user: window.localStorage.currentUser})
@@ -48,11 +55,18 @@ class App extends Component {
     this.setState({user: window.localStorage.currentUser});
   }
   loginWithGoogle = () => {
-    firebase.auth().signInWithRedirect(provider);
+    console.time('loginWithGoogle')
+    firebase.auth().signInWithRedirect(provider)
+    .then((authData) => {
+      console.timeEnd('loginWithGoogle')
+      console.log('AuthData', authData)
+      this.setState({loggedIn: true})
+    });
   };
   signOut = () => {
-    firebase.auth().signOut().then(function () {
+    firebase.auth().signOut().then(() => {
       console.log("success")
+      this.setState({loggedIn: false})
     }).catch(function (error) {
       console.log(error);
     });
@@ -61,8 +75,8 @@ class App extends Component {
     return (
       <Provider client={client}>
         <React.Fragment>
-          <Header signOut={this.signOut} loginWithGoogle={this.loginWithGoogle} loggedIn={this.state.loggedIn}/>
-          <RestaurantList />
+          <Header loading={this.state.loading} signOut={this.signOut} loginWithGoogle={this.loginWithGoogle} loggedIn={this.state.loggedIn}/>
+          <RestaurantList loggedIn={this.state.loggedIn} />
         </React.Fragment>
       </Provider>
     );

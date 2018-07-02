@@ -38,6 +38,22 @@ const RestaurantType = new GraphQLObjectType({
   })
 });
 
+const UserType = new GraphQLObjectType({
+  name: 'Restaurant',
+  fields: () => ({
+    id: { type: GraphQLID },
+    username: { type: GraphQLString },
+    email: { type: GraphQLString },
+    img: { type: GraphQLString },
+    votes: {
+      type: new GraphQLList(MenuType),
+      resolve(parent, args) {
+        return Menu.find({restaurantId: parent.id})
+      }
+    }
+  })
+});
+
 
 
 const RootQuery = new GraphQLObjectType({
@@ -54,7 +70,6 @@ const RootQuery = new GraphQLObjectType({
       type: RestaurantType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        // return _.find(restaurants, { id: args.id });
         return Restaurant.findById(args.id);
       }
     },
@@ -68,6 +83,12 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(MenuType),
       resolve(parent, args) {
         return Menu.find({})
+      }
+    },
+    users: {
+      type: new GraphQLList(MenuType),
+      resolve(parent, args) {
+        return User.find({})
       }
     }
   }
@@ -119,7 +140,9 @@ const Mutation = new GraphQLObjectType({
         votes: { type: new GraphQLNonNull(GraphQLInt) }
       },
       resolve(parent, args) {
-        return Menu.findOneAndUpdate({_id: args.id}, { $set: {votes: args.votes}});
+        return Menu.findOneAndUpdate({_id: args.id}, { $set: {votes: args.votes}}).then(() => {
+          return Menu.findById(args.id)
+        })
       }
     }
   }

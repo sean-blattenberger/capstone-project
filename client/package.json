@@ -12,6 +12,7 @@
     "react-materialize": "^2.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-spinner-material": "^1.0.17",
     "reactstrap": "^6.1.0",
     "urql": "^0.2.1"
   },

@@ -10,7 +10,8 @@ class Restaurant extends React.Component {
         <Link to={{
           pathname: `/restaurants/${this.props.r.id}`,
           state: {
-            restaurant: this.props.r
+            restaurant: this.props.r,
+            loggedIn: this.props.loggedIn
           }
         }}>
           <span className="title">{this.props.r.name}</span>
