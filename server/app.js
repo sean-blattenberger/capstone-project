@@ -13,6 +13,15 @@ mongoose.connect(process.env.DB_URL)
 mongoose.connection.once("open", () => {
   console.log('connected to database');
 })
+
+// app.post('/login',
+//   passport.authenticate('local'),
+//   function (req, res) {
+//     // If this function gets called, authentication was successful.
+//     // `req.user` contains the authenticated user.
+//     res.redirect('/users/' + req.user.username);
+//   });
+
 app.use("/graphql", graphqlHTTP({
   schema,
   graphiql: true

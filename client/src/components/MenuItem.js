@@ -30,7 +30,7 @@ class MenuItem extends React.Component {
               <span className="collection-left">
                 <i onClick={(e) => updateVotesAndRefetch(this.props.item.votes + 1, e)} value={this.props.item.votes} className="material-icons vote blue-grey-text text-darken-2">thumb_up</i>
                 <p className="vote-count">{this.state.votes}</p>
-                <i onClick={() => updateVotesAndRefetch(this.props.item.votes - 1)} value={this.props.item} className="material-icons vote blue-grey-text text-darken-2">thumb_down</i>
+                <i onClick={(e) => updateVotesAndRefetch(this.props.item.votes - 1, e)} value={this.props.item} className="material-icons vote blue-grey-text text-darken-2">thumb_down</i>
               </span>
               <span className="title bold">{this.props.item.food.toUpperCase()}</span>
               <p className="desc">{this.props.item.desc}</p>
