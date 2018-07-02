@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors')
+const port = parseInt(process.env.PORT || 4000);
 require('dotenv').config()
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
@@ -27,6 +28,6 @@ app.use("/graphql", graphqlHTTP({
   graphiql: true
 }));
 
-app.listen(4000, () => {
+app.listen(port, () => {
     console.log('now listening for requests on port 4000');
 });
