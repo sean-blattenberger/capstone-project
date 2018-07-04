@@ -31,7 +31,7 @@ class RestaurantList extends Component {
     else {
       return data.restaurants.map((r, i) => {
         return (
-          <Restaurant loggedIn={this.props.loggedIn} key={i} i={i} r={r} dummyLinks={dummyLinks}/>
+          <Restaurant data={this.props.data} user={this.props.user} loggedIn={this.props.loggedIn} key={i} i={i} r={r} dummyLinks={dummyLinks}/>
         )
       })
     }

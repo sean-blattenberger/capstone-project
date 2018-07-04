@@ -20,9 +20,9 @@ class MenuItem extends React.Component {
       >
         {({ loaded, fetching, refetch, data, error, updateVotes }) => {
           const updateVotesAndRefetch = (votes, e, color) => {
-            updateVotes({ votes, id: this.props.item.id }).then(data => {
+            console.log(this.props.data.user.id)
+            updateVotes({ votes, id: this.props.item.id, userId: this.props.data.user.id }).then(data => {
               refetch({ skipCache: true })
-
             })
             this.setState({ votes: votes });
             if (Array.from(e.target.classList).includes(`${color}-text`)) {

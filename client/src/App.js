@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
+import { mutation, Connect, query } from "urql";
+import { addUser, getUserQuery } from './queries/queries';
 import Header from "./components/Header";
-import RestaurantList from "./components/RestaurantList";
+import RestaurantList from "./components/RestaurantList"
 import { client, Provider } from "./queries/client";
 import firebase from "firebase";
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -21,7 +23,8 @@ let fbAuth = firebase.auth()
 class App extends Component {
   state = {
     loggedIn: false,
-    user: {}
+    user: {},
+    userId: 0
   };
 
   checkAuth = () => {
@@ -30,7 +33,6 @@ class App extends Component {
     .then(result => {
       if (result.credential) {
         var token = result.credential.accessToken;
-        console.log(token);
       }
       var user = result.user;
       this.setState({loading: false})
@@ -44,25 +46,21 @@ class App extends Component {
     this.checkAuth()
     fbAuth.onAuthStateChanged(currentUser => {
       if (currentUser) {
+        console.log(currentUser.email);
         window.localStorage.setItem('currentUser', currentUser)
-        this.setState({user: window.localStorage.currentUser})
+        let tempUser = {id: currentUser.id, username: currentUser.displayName, email: currentUser.email, img: currentUser.photoURL}
+        this.setState({user: tempUser})
         this.setState({loggedIn: true})
+        client.executeQuery(query(addUser, {username: currentUser.displayName, email: currentUser.email, img: currentUser.photoURL, favorites: [], votes: []}))
       } else {
         console.log("not authorized");
       }
     })
-    console.log(window.localStorage.currentUser);
     this.setState({user: window.localStorage.currentUser});
   }
   loginWithGoogle = () => {
-    console.time('loginWithGoogle')
-    firebase.auth().signInWithRedirect(provider)
-    .then((authData) => {
-      console.timeEnd('loginWithGoogle')
-      console.log('AuthData', authData)
-      this.setState({loggedIn: true})
-    });
-  };
+    firebase.auth().signInWithRedirect(provider);
+  }
   signOut = () => {
     firebase.auth().signOut().then(() => {
       console.log("success")
@@ -74,10 +72,17 @@ class App extends Component {
   render() {
     return (
       <Provider client={client}>
-        <React.Fragment>
-          <Header loading={this.state.loading} signOut={this.signOut} loginWithGoogle={this.loginWithGoogle} loggedIn={this.state.loggedIn}/>
-          <RestaurantList loggedIn={this.state.loggedIn} />
-        </React.Fragment>
+        <Connect mutation={{addUser: mutation(addUser)}} query={query(getUserQuery, {email: this.state.user.email})}>
+          {({loaded, fetching, refetch, data, error, addUser, query }) => {
+            console.log(data)
+            return (
+              <React.Fragment>
+                <Header data={data} loading={this.state.loading} signOut={this.signOut} loginWithGoogle={this.loginWithGoogle} loggedIn={this.state.loggedIn}/>
+                <RestaurantList data={data} user={this.state.user} loggedIn={this.state.loggedIn} />
+              </React.Fragment>
+            )
+          }}
+        </Connect>
       </Provider>
     );
   }

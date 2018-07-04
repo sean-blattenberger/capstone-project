@@ -3,48 +3,20 @@ import { Navbar, Button } from "react-materialize";
 import Spinner from 'react-spinner-material';
 
 
-const Header = props => {
-  // if (props.loading) {
-  //   return
-  // }
-  return (
-    <React.Fragment>
-      <div className="navbar-fixed">
-        <Navbar
-          className="blue-grey darken-3"
-          brand={
-            <div className=" light-blue-text text-lighten-3 logo thin">
-              🍽 MenuSortr
-            </div>
+const Header = props => (
+  <React.Fragment>
+    <div className="navbar-fixed">
+      <Navbar className="blue-grey darken-3" brand={<div className=" light-blue-text text-lighten-3 logo thin">🍽 MenuSortr</div>} right>
+      {props.data && props.data.user && props.loggedIn ? <Button className="light-blue lighten-3 z-depth-1">Profile</Button>: ''}
+      { props.loading ? <Spinner/>:
+        props && <Button onClick={(e) => { props.loggedIn ? props.signOut() : props.loginWithGoogle(); }} className="light-blue lighten-3 z-depth-1">
+          { props.loggedIn ? 'Logout':
+            <img alt="google login" height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googleplus.svg" />
           }
-          right
-        >
-        {
-          props.loading
-          ?
-          <Spinner/>
-          :
-          <Button onClick={(e) => {
-            if (props.loggedIn) {
-              props.signOut()
-            }
-            else {
-              props.loginWithGoogle();
-            }
-          }} className="light-blue lighten-3 z-depth-1">
-            {
-              props.loggedIn
-                ?
-                'Logout'
-                :
-                <img alt="google login" height="32" width="32" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googleplus.svg" />
-            }
-          </Button>
-        }
-        </Navbar>
-      </div>
-    </React.Fragment>
-  );
-};
+        </Button> }
+      </Navbar>
+    </div>
+  </React.Fragment>
+);
 
 export default Header;

@@ -11,7 +11,9 @@ class Restaurant extends React.Component {
           pathname: `/restaurants/${this.props.r.id}`,
           state: {
             restaurant: this.props.r,
-            loggedIn: this.props.loggedIn
+            loggedIn: this.props.loggedIn,
+            user: this.props.user,
+            data: this.props.data
           }
         }}>
           <span className="title">{this.props.r.name}</span>

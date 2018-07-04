@@ -19,7 +19,7 @@ class Menu extends Component {
             .concat([])
             .sort((a, b) => b.votes - a.votes)
             .map((item, i) => {
-              return <MenuItem key={i} item={item} />;
+              return <MenuItem data={this.props.location.state.data} user={this.props.location.state.user} key={i} item={item} />;
             })}
         </Collection>
       );
