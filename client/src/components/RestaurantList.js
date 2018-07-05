@@ -17,6 +17,18 @@ const dummyLinks = [
   {
     img: 'http://loschingonesmexican.com/wp-content/uploads/2014/12/Los-Chingones-Logo.png',
     link: 'https://loschingonesmexican.com/'
+  },
+  {
+    img: 'https://panzano-denver.com/uploads/cjhjgt95d00jn0i3lg2llm2ms/attachments/cjhmefhjv0d3pbp3luqxixqa8-panzano-logo-color.full.png',
+    link: "https://panzano-denver.com/"
+  },
+  {
+    img: "https://static1.squarespace.com/static/559b4924e4b0e8559d2b7a1b/t/5666324969492e8e1cd78c08/1449538193280/Hop+Alley+Chinese+Food%2C+Denver",
+    link: "http://hopalleydenver.com/"
+  },
+  {
+    img: "http://justbekitchen.com/wp-content/uploads/2017/03/just-be-kitchen-logo.png",
+    link: "http://justbekitchen.com/"
   }
 ]
 

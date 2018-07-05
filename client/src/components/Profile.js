@@ -8,7 +8,7 @@ class Profile extends React.Component {
       <React.Fragment>
         <Header loggedIn={this.props.location.state.loggedIn} data={this.props.location.state.data}/>
         <Row>
-          <Col offset="m3" m={5} s={12}>
+          <Col offset="l3" l={5} s={12}>
             <Card className='profile' textClassName='light-blue-text' title={<div className="right">{this.props.location.state.user.username}</div>} >
               <Row>
                 <img height="64px" className="circle" src={this.props.location.state.user.img}/><br/>
