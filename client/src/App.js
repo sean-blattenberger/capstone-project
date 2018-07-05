@@ -46,7 +46,6 @@ class App extends Component {
     this.checkAuth()
     fbAuth.onAuthStateChanged(currentUser => {
       if (currentUser) {
-        console.log(currentUser.email);
         window.localStorage.setItem('currentUser', currentUser)
         let tempUser = {id: currentUser.id, username: currentUser.displayName, email: currentUser.email, img: currentUser.photoURL}
         this.setState({user: tempUser})
@@ -74,7 +73,6 @@ class App extends Component {
       <Provider client={client}>
         <Connect mutation={{addUser: mutation(addUser)}} query={query(getUserQuery, {email: this.state.user.email})}>
           {({loaded, fetching, refetch, data, error, addUser, query }) => {
-            console.log(data)
             return (
               <React.Fragment>
                 <Header data={data} loading={this.state.loading} signOut={this.signOut} loginWithGoogle={this.loginWithGoogle} loggedIn={this.state.loggedIn}/>

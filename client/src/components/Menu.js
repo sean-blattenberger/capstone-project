@@ -29,7 +29,7 @@ class Menu extends Component {
     return (
       <Provider client={client}>
         <React.Fragment>
-          <Header loggedIn={this.props.location.state.loggedIn} />
+          <Header data={this.props.location.state.data} loggedIn={this.props.location.state.loggedIn} />
           <div className="container">{this.displayData()}</div>
         </React.Fragment>
       </Provider>
