@@ -28,7 +28,10 @@ MenuSortr is a food app designed to highlight the information user's want to fin
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Thanks for checking out my project!
-
-  Title | MenuSortr 
-  Author | Sean Blattenberger 
-  Date | July 4, 2018  
+ 
+## Author
+Tables        | Are           | Cool  |
+------------- |:-------------:| -----:|
+col 3 is      | right-aligned | $1600 |
+col 2 is      | centered      |   $12 |
+zebra stripes | are neat      |    $1 |
