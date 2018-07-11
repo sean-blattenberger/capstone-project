@@ -30,8 +30,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Thanks for checking out my project!
  
 ## Author
-Tables        | Are           | Cool  |
-------------- |:-------------:| -----:|
-col 3 is      | right-aligned | $1600 |
-col 2 is      | centered      |   $12 |
-zebra stripes | are neat      |    $1 |
+Tables        | Are           |
+------------- |:-------------:|
+col 3 is      | right-aligned |
+col 2 is      | centered      |
+zebra stripes | are neat      |
