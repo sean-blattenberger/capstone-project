@@ -29,6 +29,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Thanks for checking out my project!
 
-  Title:	MenuSortr 
-	Author: Sean Blattenberger 
-	Date:	July 4, 2018  
+  Title | MenuSortr 
+  Author | Sean Blattenberger 
+  Date | July 4, 2018  
